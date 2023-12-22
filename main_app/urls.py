@@ -1,5 +1,8 @@
 from django.urls import path , re_path
+from django.contrib import admin
+from django.urls import include
 from . import views
+from .views import nearby 
 
 urlpatterns = [
     path("", views.home, name="home"),
@@ -27,7 +30,8 @@ urlpatterns = [
     
     path('post', views.post, name='post'),
     path('chat_messages', views.chat_messages, name='chat_messages'),
-    
-
-
-]  
+    # your_app/urls.py
+    path('nearby/', nearby, name='nearby'),
+    # Add other URL patterns as needed
+    path('admin/', admin.site.urls),
+]

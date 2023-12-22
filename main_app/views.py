@@ -17,6 +17,9 @@ model = jb.load('trained_model')
 
 
 
+def nearby(request):
+    return render(request, '/templates/nearby.html')
+
 
 def home(request):
 
