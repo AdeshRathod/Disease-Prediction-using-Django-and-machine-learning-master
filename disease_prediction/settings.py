@@ -28,6 +28,11 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# Open API
+
+OPENAI_API_KEY = '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'
+
+
 # Application definition
 
 INSTALLED_APPS = [

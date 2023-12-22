@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.http import JsonResponse
 from datetime import date
+import openai
+from django.conf import settings
 
 from django.contrib import messages
 from django.contrib.auth.models import User , auth
@@ -9,13 +11,38 @@ from .models import patient , doctor , diseaseinfo , consultation ,rating_review
 from chats.models import Chat,Feedback
 
 # Create your views here.
+openai.api_key = settings.OPENAI_API_KEY
 
+# def predict_medicines(request):
+#     if request.method == 'POST':
+#         disease_name = request.POST.get('disease_name', '')
+#         if disease_name:
+#             # Send a request to OpenAI API to predict medicines based on the disease name
+#             response = openai.Completion.create(
+#                 engine="text-davinci-002",  # You can experiment with different engines
+#                 prompt=f"Predict medicines for {disease_name}",
+#                 max_tokens=100  # Adjust as needed
+#             )
+#             predicted_medicines = response['choices'][0]['text'].strip()
+#             return JsonResponse({'predicted_medicines': predicted_medicines})
+
+#     return JsonResponse({'error': 'Invalid request'})
+def predict_medicines(request):
+    # Your logic to predict medicines
+    # For now, let's return a dummy response
+    predicted_medicines = ['Medicine A', 'Medicine B', 'Medicine C']
+    
+    # Return a JsonResponse with the predicted medicines
+    return JsonResponse({'predicted_medicines': predicted_medicines})
 
 #loading trained_model
 import joblib as jb
 model = jb.load('trained_model')
 
 
+def predict_medicines(request):
+    # Your view logic here
+    return render(request, 'predict_medicines.html')
 
 def nearby(request):
     return render(request, '/templates/nearby.html')
